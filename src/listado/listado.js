@@ -5,7 +5,7 @@ import './listado.css';
 function Listado() {
 
   const [listaPokemos, setListaPokemons] = useState([])
-  const [urlPokeApi, setUrlPokeApi] = useState("https://pokeapi.co/api/v2/pokemon?limit=200")
+  const [urlPokeApi, setUrlPokeApi] = useState("https://pokeapi.co/api/v2/pokemon?limit=8")
 
   useEffect( () => cargaTodos(), []);
 
@@ -28,9 +28,9 @@ function Listado() {
       {
         listaPokemos.map( (pokemon, index) => <ListItem key={index} url={pokemon.url} />)
       }
-
-      <button onClick={cargaMas}>Cargar mas</button>
     </div>
+
+    <button onClick={cargaMas}>Cargar mas</button>
   </>;
 }
 

@@ -6,7 +6,12 @@
 }
 
 .list-item__img-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: #f2f2f2;
+    width: 100%;
+    height: 205px;
 }
 
 /* .list-item__img {
