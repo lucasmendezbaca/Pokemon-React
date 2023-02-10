@@ -5,7 +5,7 @@ import './listado.css';
 function Listado() {
 
   const [listaPokemos, setListaPokemons] = useState([])
-  const [urlPokeApi, setUrlPokeApi] = useState("https://pokeapi.co/api/v2/pokemon?limit=8")
+  const [urlPokeApi, setUrlPokeApi] = useState("https://pokeapi.co/api/v2/pokemon?limit=200")
 
   useEffect( () => cargaTodos(), []);
 

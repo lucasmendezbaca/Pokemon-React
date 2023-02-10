@@ -1,5 +1,5 @@
 .listado {
     display: grid;
-    grid-template-columns: repeat(auto-fill,minmax(277px,1fr));
+    grid-template-columns: repeat(auto-fill,minmax(205px,205px));
     grid-gap: 1.5rem;
 }
