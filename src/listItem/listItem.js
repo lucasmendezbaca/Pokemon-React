@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import Detail from '../detail/detail';
 import './listItem.css'
 
 function ListItem(props) {
@@ -24,8 +25,9 @@ function ListItem(props) {
         dark: 'list-item__type--siniestro'
     }
 
-    const [pokemon, setPokemon] = useState({})
+    const [pokemon, setPokemon] = useState()
     const [isLoading, setIsLoading] = useState(true);
+    const [isDetail, setIsDetail] = useState(false);
 
     useEffect( () => cargarPokemon(), []);
 
@@ -43,8 +45,12 @@ function ListItem(props) {
         return <h3>cargando...</h3>
     }
 
+    if (isDetail) {
+        return <Detail pokemon={pokemon} />
+    }
+
     return (
-        <div className='list-item'>
+        <div onClick={() => setIsDetail(true)} className='list-item'>
             <div className='list-item__img-container'>
                 <img className='list-item__img' src={pokemon.sprites.front_default} />
             </div>
