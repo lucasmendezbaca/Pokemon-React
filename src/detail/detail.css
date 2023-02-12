@@ -1,8 +1,44 @@
 .detalle {
-    position: absolute;
+    position: fixed;
     top: 0;
     right: 0;
     min-width: 100%;
     min-height: 100vh;
     background-color: white;
+}
+
+.detalle--nome {
+    display: none;
+}
+
+.header--detalle {
+    text-align: center;
+}
+
+.detalle__nombre {
+    text-transform: uppercase;
+}
+
+.detalle__id {
+    color: lightslategrey;
+}
+
+.detalle__main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8vw;
+}
+
+.detalle__main__physical-characteristics {
+    display: grid;
+    grid-template-columns: auto auto;
+    column-gap: 5vw;
+    background-color: #30a7d7;
+    padding: 10px 20px;
+    border-radius: 12px;
+}
+
+.detalle__main__physical-characteristics__title {
+    color: white;
 }

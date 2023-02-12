@@ -23,27 +23,51 @@ function Detail(props) {
         dark: 'list-item__type--siniestro'
     }
 
+    function goToPokedex() {
+        props.setIsDetail(false);
+    }
+
     return (
         <div className="detalle">
-            <h1>{props.pokemon.name}</h1>
-            <div className="detalle__img-container">
-                <img className="detalle__img" src={props.pokemon.sprites.front_default} />
+            <div className='header--detalle'>
+                <h1>
+                    <span className='detalle__nombre'>{props.pokemon.name}</span>&nbsp;
+                    <span className="detalle__id">N.º {props.pokemon.id}</span>
+                </h1>
             </div>
-            <div className="detalle__info">
-                <p className="detalle__info__id">#{props.pokemon.id}</p>
-                <h2 className="detalle__info__name">{props.pokemon.name}</h2>
-                <div className="detalle__info__types">
-                    {
-                        props.pokemon.types.map( (type, index) => <span className={`detalle__info__types__type ${typeClass[type.type.name]}`} key={index}>{type.type.name}</span>)
-                    }
+            <div className='detalle__main'>
+                <div className='detalle__main__first-column'>
+                    <div className='detalle__main__first-column__img-container'>
+                        <img className='detalle__main__first-column__img-container__img' src={props.pokemon.sprites.front_default} />
+                    </div>
+                </div>
+                <div className='detalle__main__second-column'>
+                    <div className='detalle__main__physical-characteristics'>
+                        <div className='detalle__main__weight'>
+                            <p className='detalle__main__physical-characteristics__title'>Peso:</p>
+                            <p>{props.pokemon.weight} kg</p>
+                        </div>
+                        <div className='detalle__main__height'>
+                            <p className='detalle__main__physical-characteristics__title'>Altura:</p>
+                            <p>{props.pokemon.height} m</p>
+                        </div>
+                        <div className='detalle__main__abilities'>
+                            <p className='detalle__main__physical-characteristics__title'>Habilidades:</p>
+                            {
+                                props.pokemon.abilities.map( (ability, index) => <p key={index}>{ability.ability.name}</p>)
+                            }
+                        </div>
+                    </div>
+
+                    <div className='detalle__main__types'>
+                        <h3>Tipo:</h3>
+                        {
+                            props.pokemon.types.map( (type, index) => <span className={`list-item__type ${typeClass[type.type.name]}`} key={index}>{type.type.name}</span>)
+                        }
+                    </div>
                 </div>
             </div>
-            <div className="detalle__info__stats">
-                <div className="detalle__info__stats__stat">
-                    <p className="detalle__info__stats__stat__name">HP</p>
-                    <p className="detalle__info__stats__stat__value">{props.pokemon.stats[0].base_stat}</p>
-                </div>
-            </div>
+            <button className='boton' onClick={goToPokedex}>Ir a la Pokedex</button>
         </div>
     );
 }

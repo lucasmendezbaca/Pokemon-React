@@ -1,5 +1,20 @@
 .listado {
     display: grid;
     grid-template-columns: repeat(auto-fill,minmax(205px,1fr));
-    grid-gap: 1.5rem;
+    column-gap: 1.5rem;
+    row-gap: 3rem;
+}
+
+.boton {
+    display: block;
+    margin: 50px auto;
+    text-align: center;
+    text-decoration: none;
+    padding: 1rem;
+    background-color: #DA552F;
+    color: #FFF;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-radius: 0.5rem;
+    border: none;
 }

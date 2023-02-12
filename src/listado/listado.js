@@ -30,7 +30,7 @@ function Listado() {
       }
     </div>
 
-    <button onClick={cargaMas}>Cargar mas</button>
+    <button className='boton' onClick={cargaMas}>Cargar mas</button>
   </>;
 }
 

@@ -46,7 +46,7 @@ function ListItem(props) {
     }
 
     if (isDetail) {
-        return <Detail pokemon={pokemon} />
+        return <Detail pokemon={pokemon} setIsDetail={setIsDetail} />
     }
 
     return (
