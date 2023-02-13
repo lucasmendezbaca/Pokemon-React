@@ -1,6 +1,9 @@
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import './detail.css'
 
-function Detail(props) {
+function Detail() {
     const typeClass = {
         grass: 'list-item__type--planta',
         poison: 'list-item__type--veneno',
@@ -23,38 +26,55 @@ function Detail(props) {
         dark: 'list-item__type--siniestro'
     }
 
-    function goToPokedex() {
-        props.setIsDetail(false);
+
+    const id = useParams().id;
+    const [pokemon, setPokemon] = useState()
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect( () => cargarPokemon(), []);
+
+    function cargarPokemon() {
+        fetch('https://pokeapi.co/api/v2/pokemon/' + id)
+        .then((response) => response.json())  
+        .then((pokemonData) => {
+            console.log(pokemonData)
+            setPokemon(pokemonData);
+            setIsLoading(false)
+        });
+    }
+
+    if(isLoading) {
+        return <h3>cargando...</h3>
     }
 
     return (
         <div className="detalle">
             <div className='header--detalle'>
                 <h1>
-                    <span className='detalle__nombre'>{props.pokemon.name}</span>&nbsp;
-                    <span className="detalle__id">N.º {props.pokemon.id}</span>
+                    <span className='detalle__nombre'>{pokemon.name}</span>&nbsp;
+                    <span className="detalle__id">N.º {pokemon.id}</span>
                 </h1>
             </div>
             <div className='detalle__main'>
                 <div className='detalle__main__first-column'>
                     <div className='detalle__main__first-column__img-container'>
-                        <img className='detalle__main__first-column__img-container__img' src={props.pokemon.sprites.front_default} />
+                        <img className='detalle__main__first-column__img-container__img' src={pokemon.sprites.front_default} />
                     </div>
                 </div>
                 <div className='detalle__main__second-column'>
                     <div className='detalle__main__physical-characteristics'>
                         <div className='detalle__main__weight'>
                             <p className='detalle__main__physical-characteristics__title'>Peso:</p>
-                            <p>{props.pokemon.weight} kg</p>
+                            <p>{pokemon.weight} kg</p>
                         </div>
                         <div className='detalle__main__height'>
                             <p className='detalle__main__physical-characteristics__title'>Altura:</p>
-                            <p>{props.pokemon.height} m</p>
+                            <p>{pokemon.height} m</p>
                         </div>
                         <div className='detalle__main__abilities'>
                             <p className='detalle__main__physical-characteristics__title'>Habilidades:</p>
                             {
-                                props.pokemon.abilities.map( (ability, index) => <p key={index}>{ability.ability.name}</p>)
+                                pokemon.abilities.map( (ability, index) => <p key={index}>{ability.ability.name}</p>)
                             }
                         </div>
                     </div>
@@ -62,12 +82,14 @@ function Detail(props) {
                     <div className='detalle__main__types'>
                         <h3>Tipo:</h3>
                         {
-                            props.pokemon.types.map( (type, index) => <span className={`list-item__type ${typeClass[type.type.name]}`} key={index}>{type.type.name}</span>)
+                            pokemon.types.map( (type, index) => <span className={`list-item__type ${typeClass[type.type.name]}`} key={index}>{type.type.name}</span>)
                         }
                     </div>
                 </div>
             </div>
-            <button className='boton' onClick={goToPokedex}>Ir a la Pokedex</button>
+            <Link to="/pokedex">
+                <button className='boton'>Ir a la Pokedex</button>
+            </Link>
         </div>
     );
 }

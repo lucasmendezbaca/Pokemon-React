@@ -5,3 +5,8 @@ body {
 h1 {
   margin-bottom: 10vh;
 }
+
+a{
+  text-decoration: none;
+  color: black;
+}

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import Detail from '../detail/detail';
+import { Link } from "react-router-dom";
 import './listItem.css'
 
 function ListItem(props) {
@@ -27,7 +28,6 @@ function ListItem(props) {
 
     const [pokemon, setPokemon] = useState()
     const [isLoading, setIsLoading] = useState(true);
-    const [isDetail, setIsDetail] = useState(false);
 
     useEffect( () => cargarPokemon(), []);
 
@@ -45,23 +45,21 @@ function ListItem(props) {
         return <h3>cargando...</h3>
     }
 
-    if (isDetail) {
-        return <Detail pokemon={pokemon} setIsDetail={setIsDetail} />
-    }
-
     return (
-        <div onClick={() => setIsDetail(true)} className='list-item'>
-            <div className='list-item__img-container'>
-                <img className='list-item__img' src={pokemon.sprites.front_default} />
+        <Link to={`${pokemon.id}`}>
+            <div className='list-item'>
+                <div className='list-item__img-container'>
+                    <img className='list-item__img' src={pokemon.sprites.front_default} />
+                </div>
+                <div>
+                    <p># {pokemon.id}</p>
+                    <h2>{pokemon.name}</h2>
+                    {
+                        pokemon.types.map( (type, index) => <span className={`list-item__type ${typeClass[type.type.name]}`} key={index}>{type.type.name}</span>)
+                    }
+                </div>
             </div>
-            <div>
-                <p># {pokemon.id}</p>
-                <h2>{pokemon.name}</h2>
-                {
-                    pokemon.types.map( (type, index) => <span className={`list-item__type ${typeClass[type.type.name]}`} key={index}>{type.type.name}</span>)
-                }
-            </div>
-        </div>
+        </Link>
     )
 }
 

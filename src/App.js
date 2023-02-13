@@ -1,13 +1,13 @@
-import Header from './header/header';
 import Listado from './listado/listado';
+import Router from './Router';
 import './App.css';
 
 function App() {
   return (
-    <div>
-      <Header />
-      <Listado />
-    </div>
+    <Router />
+    // <div>
+    //   <Listado />
+    // </div>
   );
 }
 
