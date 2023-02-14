@@ -3,9 +3,10 @@ import './play.css';
 
 function Play() {
     const id = Math.floor(Math.random() * 500) + 1;
-    const [pokemon, setPokemon] = useState()
+    const [pokemon, setPokemon] = useState({});
     const [isLoading, setIsLoading] = useState(true);
-    const [tryName, setTryName] = useState([])
+    const [tryName, setTryName] = useState([]);
+    const [isCorrect, setIsCorrect] = useState();
 
     useEffect( () => {
         cargarPokemon()
@@ -15,39 +16,61 @@ function Play() {
         fetch('https://pokeapi.co/api/v2/pokemon/' + id)
         .then((response) => response.json())  
         .then((pokemonData) => {
-            console.log(pokemonData)
             setPokemon(pokemonData);
-            setIsLoading(false)
+            setIsLoading(false);
+            setTryName(initializeTryName(pokemonData.name));
         });
     }
 
-    function initializeTryName() {
-        const array = pokemon.name.split('').map( (letter, index) => '');
-        console.log(array);
-        setTryName(array)
+    function initializeTryName(name) {
+        const array = name.split('').map( (letter, index) => '');
+        return array;
     }
 
 
     function check(e) {
-        if(tryName.length === 0) {
-            initializeTryName()
-        }
-
         const inputLetter = e.target.value;
         const index = e.target.getAttribute('indice');
-
-        setTryName(tryName.map( (letter, i) => {
-            if(i === index) {
+        const newTryName = tryName.map( (letter, i) => {
+            if(i === parseInt(index)) {
                 return inputLetter
             } else {
+                if(letter !== '') {
+                    return letter
+                }
                 return ''
             }
-        }))
+        })
 
-        console.log(tryName)
+        setTryName(newTryName);
     }
 
-    function isCorrect() {
+    function navigation(e) {
+        if(e.target.nextElementSibling && e.key !== 'Backspace' && e.key !== 'Enter') {
+            e.target.nextElementSibling.focus();
+        }
+
+        if(e.target.previousElementSibling && e.key === 'Backspace') {
+            e.target.previousElementSibling.focus();
+        }
+    }
+
+    function endGame(e) {
+        if(e.key === 'Enter'){
+            const tryNameString = tryName.join('');
+            if(tryNameString === pokemon.name) {
+                setIsCorrect(true);
+            } else {
+                setIsCorrect(false);
+            }
+        }
+
+        navigation(e);
+    }
+
+    function newGame() {
+        cargarPokemon();
+        setIsCorrect(false);
     }
 
     if(isLoading) {
@@ -62,26 +85,16 @@ function Play() {
                 <img className='img-play' src={pokemon.sprites.front_default} />
                 <div className='input-play-container'>
                     {
-                        // pokemon.name.split('').map( (letter, index) => <input className='input-play' type='text' key={index} />)
-                        // capturar el evento de teclado de la tecla enter en cada input
-                        pokemon.name.split('').map( (letter ,index) => <input className='input-play' type='text' key={index} indice={index} onChange={check} />)
+                        pokemon.name.split('').map( (letter ,index) => <input className='input-play' type='text' maxLength="1" key={index} indice={index} onChange={check} onKeyUp={endGame} />)
                     }
                 </div>
+                {
+                    isCorrect && <h3>Correcto</h3>
+                }
             </div>
+            <button className='boton' onClick={newGame}>New Game</button>
         </div>
     )
 }
 
 export default Play
-
-
-
-
-
-
-
-
-        // if(e.key === 'Enter'){
-        //     console.log('You must have pressed Enter ')
-        //     return
-        // }

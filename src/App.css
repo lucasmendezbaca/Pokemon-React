@@ -11,3 +11,17 @@ a{
   text-decoration: none;
   color: black;
 }
+
+.boton {
+    display: block;
+    margin: 50px auto;
+    text-align: center;
+    text-decoration: none;
+    padding: 1rem;
+    background-color: #DA552F;
+    color: #FFF;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-radius: 0.5rem;
+    border: none;
+}
