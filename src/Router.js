@@ -4,6 +4,8 @@ import Detail from "./detail/detail";
 import Home from "./home/home";
 import Play from "./play/play";
 import Navigation from "./navigation/navigation";
+
+import PruebaFirestore from "./pruebaFirestore/pruebaFirestore";
 const Router = () => {
 
   return (
@@ -15,6 +17,7 @@ const Router = () => {
           <Route path="/pokedex" element={<Listado />}></Route>
           <Route path="/play" element={<Play />}></Route>
           <Route path="/pokedex/:id" element={<Detail />}></Route>
+          <Route path="/pruebaFirestore" element={<PruebaFirestore />}></Route>
         </Routes>
       </BrowserRouter>
     </>

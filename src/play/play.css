@@ -1,0 +1,22 @@
+.img-play {
+    filter: brightness(0%) saturate(100%);
+}
+
+.input-play {
+    max-width: 50px;
+    border: none;
+    border-bottom: 1px solid #000;
+}
+
+.input-play-container {
+    display: flex;
+    gap: 10px;
+}
+
+.game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
