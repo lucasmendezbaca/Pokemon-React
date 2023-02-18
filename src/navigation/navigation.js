@@ -14,6 +14,9 @@ function Navigation() {
                 <li>
                     <Link to="/play">Play</Link>
                 </li>
+                <li>
+                    <Link to="/register">Register</Link>
+                </li>
             </ul>
         </div>
     );
