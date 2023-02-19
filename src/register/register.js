@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from '../firebaseConfig';
+import { register as serviceRegister} from '../services/authService';
 import { useNavigate } from 'react-router-dom';
 
 function Register() {
@@ -18,17 +17,8 @@ function Register() {
     }
 
     function register() {
-        createUserWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                const user = userCredential.user;
-                console.log(user);
-                navigate('/pokedex');
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.log(errorCode, errorMessage);
-            });
+        serviceRegister(email, password);
+        navigate('/pokedex');
     }
 
     return (
