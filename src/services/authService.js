@@ -1,13 +1,25 @@
 import { createUserWithEmailAndPassword, signOut } from "firebase/auth";
 import { auth } from '../firebaseConfig';
+import React, { useState, createContext } from 'react';
 
-export const user = null; 
+export const UserContext = createContext(null);
+
+export function UserContextProvider({ children }) {
+    const [user, setUser] = useState('usuario');
+
+    return (
+        <UserContext.Provider value={{ user, setUser }}>
+            {children}
+        </UserContext.Provider>
+    )
+}
 
 export async function register(email, password) {
     await createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-            user = userCredential.user;
-            console.log(user);
+            // user = userCredential.user;
+            // console.log(user);
+            console.log(userCredential.user)
         })
         .catch((error) => {
             const errorCode = error.code;

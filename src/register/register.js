@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { register as serviceRegister} from '../services/authService';
 import { useNavigate } from 'react-router-dom';
+import './register.css';
+import { UserContext } from '../services/authService';
 
 function Register() {
+    const user = useContext(UserContext);
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -18,7 +21,7 @@ function Register() {
 
     function register() {
         serviceRegister(email, password);
-        navigate('/pokedex');
+        // navigate('/pokedex');
     }
 
     return (
@@ -28,9 +31,11 @@ function Register() {
                 <input type="email" placeholder="email" onChange={changeEmail} />
                 <input type="password" placeholder="password" onChange={changePassword} />
                 <button onClick={register}>Registrarse</button>
+                <p>{user.user}</p>
             </div>
         </div>
     )
+
 }
 
 export default Register

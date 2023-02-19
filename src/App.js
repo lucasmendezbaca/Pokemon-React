@@ -1,13 +1,13 @@
 import Listado from './listado/listado';
 import Router from './Router';
 import './App.css';
+import { UserContextProvider } from './services/authService';
 
 function App() {
   return (
-    <Router />
-    // <div>
-    //   <Listado />
-    // </div>
+    <UserContextProvider>
+      <Router />
+    </UserContextProvider>
   );
 }
 
