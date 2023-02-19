@@ -24,6 +24,10 @@
     gap: 8vw;
 }
 
+.detalle__main__img {
+    max-width: 400px;
+}
+
 .detalle__main__physical-characteristics {
     display: grid;
     grid-template-columns: auto auto;

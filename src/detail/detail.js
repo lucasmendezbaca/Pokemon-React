@@ -43,6 +43,10 @@ function Detail() {
         });
     }
 
+    function withDecimal(number) {
+        return number / 10;
+    }
+
     if(isLoading) {
         return <h3>cargando...</h3>
     }
@@ -58,18 +62,18 @@ function Detail() {
             <div className='detalle__main'>
                 <div className='detalle__main__first-column'>
                     <div className='detalle__main__first-column__img-container'>
-                        <img className='detalle__main__first-column__img-container__img' src={pokemon.sprites.front_default} />
+                        <img className='detalle__main__img' src={pokemon.sprites.other.home.front_default} />
                     </div>
                 </div>
                 <div className='detalle__main__second-column'>
                     <div className='detalle__main__physical-characteristics'>
                         <div className='detalle__main__weight'>
                             <p className='detalle__main__physical-characteristics__title'>Peso:</p>
-                            <p>{pokemon.weight} kg</p>
+                            <p>{withDecimal(pokemon.weight)} kg</p>
                         </div>
                         <div className='detalle__main__height'>
                             <p className='detalle__main__physical-characteristics__title'>Altura:</p>
-                            <p>{pokemon.height} m</p>
+                            <p>{withDecimal(pokemon.height)} m</p>
                         </div>
                         <div className='detalle__main__abilities'>
                             <p className='detalle__main__physical-characteristics__title'>Habilidades:</p>
