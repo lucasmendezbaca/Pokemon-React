@@ -21,7 +21,7 @@ function Register() {
 
     function register() {
         serviceRegister(email, password);
-        // navigate('/pokedex');
+        navigate('/pokedex');
     }
 
     return (
