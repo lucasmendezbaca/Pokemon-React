@@ -1,7 +1,13 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './play.css';
 
-function Play() {
+function Play({user}) {
+    const navigate = useNavigate();
+    if(!user) {
+        navigate('/login');
+    }
+
     const id = Math.floor(Math.random() * 500) + 1;
     const [pokemon, setPokemon] = useState({});
     const [isLoading, setIsLoading] = useState(true);
