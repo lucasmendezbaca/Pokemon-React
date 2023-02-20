@@ -1,12 +1,8 @@
 import React, { useState, useContext } from 'react';
-import { register as serviceRegister, currentUser} from '../services/authService';
+import { logIn as serviceLogIn, currentUser} from '../services/authService';
 import { useNavigate } from 'react-router-dom';
-import './register.css';
-import { UserContext } from '../services/authService';
 
-function Register() {
-    const user = useContext(UserContext);
-
+function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
@@ -19,15 +15,15 @@ function Register() {
         setPassword(e.target.value);
     }
 
-    function register() {
-        serviceRegister(email, password);
+    function logIn() {
+        serviceLogIn(email, password);
         navigate('/pokedex');
     }
 
     return (
         <div className='account-form-container'>
             <div className="registration" method="post">
-            <h1>👋 Register!</h1>
+            <h1>👋 Login!</h1>
 
             <label className="pure-material-textfield-outlined">
                 <input placeholder=" " type="email" required onChange={changeEmail}/>
@@ -39,7 +35,7 @@ function Register() {
                 <span>Password</span>
             </label>
 
-            <button className="pure-material-button-contained" onClick={register}>Sign Up</button>
+            <button className="pure-material-button-contained" onClick={logIn}>Log In</button>
 
             <div className="progress">
                 <progress className="pure-material-progress-circular" />
@@ -49,6 +45,7 @@ function Register() {
         </div>
     )
 
+
 }
 
-export default Register
+export default Login;

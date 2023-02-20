@@ -5,6 +5,7 @@ import Home from "./home/home";
 import Play from "./play/play";
 import Navigation from "./navigation/navigation";
 import Register from "./register/register";
+import Login from "./login/login";
 import Error from "./404/error";
 
 import PruebaFirestore from "./pruebaFirestore/pruebaFirestore";
@@ -21,6 +22,7 @@ const Router = () => {
           <Route path="/pokedex/:id" element={<Detail />}></Route>
           <Route path="/pruebaFirestore" element={<PruebaFirestore />}></Route>
           <Route path="/register" element={<Register />}></Route>
+          <Route path="/login" element={<Login />}></Route>
           <Route path="*" element={<Error />}></Route>
         </Routes>
       </BrowserRouter>

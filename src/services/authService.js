@@ -1,7 +1,8 @@
-import { createUserWithEmailAndPassword, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { auth } from '../firebaseConfig';
 import React, { useState, createContext, useContext } from 'react';
 
+export const currentUser = auth.currentUser;
 export const UserContext = createContext(null);
 
 export function UserContextProvider({ children }) {
@@ -20,11 +21,26 @@ export async function register(email, password) {
             // user = userCredential.user;
             // console.log(user);
             console.log(userCredential.user)
+            currentUser = userCredential.user;
         })
         .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
             console.log(errorCode, errorMessage);
+        });
+}
+
+export function logIn(email, password) {
+    signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            // Signed in
+            const user = userCredential.user;
+            console.log(user)
+            // ...
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
         });
 }
 
