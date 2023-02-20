@@ -1,27 +1,10 @@
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from '../firebaseConfig';
-import React, { useState, createContext, useContext } from 'react';
-
-export const currentUser = auth.currentUser;
-export const UserContext = createContext(null);
-
-export function UserContextProvider({ children }) {
-    const [user, setUser] = useState('usuario');
-
-    return (
-        <UserContext.Provider value={{ user, setUser }}>
-            {children}
-        </UserContext.Provider>
-    )
-}
 
 export async function register(email, password) {
     await createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-            // user = userCredential.user;
-            // console.log(user);
             console.log(userCredential.user)
-            currentUser = userCredential.user;
         })
         .catch((error) => {
             const errorCode = error.code;
@@ -33,16 +16,31 @@ export async function register(email, password) {
 export function logIn(email, password) {
     signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-            // Signed in
             const user = userCredential.user;
             console.log(user)
-            // ...
         })
         .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
         });
 }
+
+export async function loginWithGoogle() {
+    await signInWithPopup(auth, new GoogleAuthProvider())
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+      }).catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.customData.email;
+        // The AuthCredential type that was used.
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        console.log(errorCode, errorMessage, email, credential)
+      });
+  }
 
 export function logOut() {
     signOut(auth).then(() => {

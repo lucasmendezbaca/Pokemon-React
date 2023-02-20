@@ -8,13 +8,27 @@ import Register from "./register/register";
 import Login from "./login/login";
 import Error from "./404/error";
 
+import { auth } from './firebaseConfig';
+import { useState, useEffect } from 'react';
+
 import PruebaFirestore from "./pruebaFirestore/pruebaFirestore";
 const Router = () => {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        setUser(user);
+      } else {
+        setUser(null);
+      }
+    });
+  }, []);
 
   return (
     <>
       <BrowserRouter>
-        <Navigation />
+        <Navigation user={user} />
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/pokedex" element={<Listado />}></Route>

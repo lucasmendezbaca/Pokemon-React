@@ -37,11 +37,6 @@ a:hover {
     text-decoration: underline;
 }
 
-button {
-    display: block !important;
-    margin: 32px auto;
-}
-
 .done,
 .progress {
     position: absolute;

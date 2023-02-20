@@ -1,12 +1,9 @@
-import React, { useState, useContext } from 'react';
-import { register as serviceRegister, currentUser} from '../services/authService';
+import React, { useState } from 'react';
+import { register as serviceRegister, loginWithGoogle as loginWithGoogleService } from '../services/authService';
 import { useNavigate } from 'react-router-dom';
 import './register.css';
-import { UserContext } from '../services/authService';
 
 function Register() {
-    const user = useContext(UserContext);
-
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
@@ -24,6 +21,11 @@ function Register() {
         navigate('/pokedex');
     }
 
+    function loginWithGoogle() {
+        loginWithGoogleService();
+        navigate('/pokedex');
+    }
+
     return (
         <div className='account-form-container'>
             <div className="registration" method="post">
@@ -38,6 +40,11 @@ function Register() {
                 <input placeholder=" " type="password" required onChange={changePassword} />
                 <span>Password</span>
             </label>
+
+            <div>
+                <span>Login with:</span>
+                <button onClick={loginWithGoogle}>Google</button>
+            </div>
 
             <button className="pure-material-button-contained" onClick={register}>Sign Up</button>
 

@@ -1,11 +1,9 @@
 import { Link } from "react-router-dom";
 import './navigation.css'
-import { logOut, currentUser } from '../services/authService';
+import { logOut } from '../services/authService';
 
-function Navigation() {
-
-    console.log(currentUser)
-    if (currentUser) {
+function Navigation({user}) {
+    if (user) {
         return (
             <div>
                 <ul className="menu">
@@ -18,11 +16,8 @@ function Navigation() {
                     <li>
                         <Link to="/play">Play</Link>
                     </li>
-                    <li>
-                        <Link to="/register">Register</Link>
-                    </li>
                     <li onClick={logOut}>
-                        <Link to="/">Sing Out</Link>
+                        <Link to="/">Sing Out | {user.email}</Link>
                     </li>
                 </ul>
             </div>
@@ -39,13 +34,10 @@ function Navigation() {
                     <Link to="/pokedex">Pokedex</Link>
                 </li>
                 <li>
-                    <Link to="/play">Play</Link>
+                    <Link to="/login">Login</Link>
                 </li>
                 <li>
                     <Link to="/register">Register</Link>
-                </li>
-                <li>
-                    <Link to="/login">Login</Link>
                 </li>
             </ul>
         </div>
