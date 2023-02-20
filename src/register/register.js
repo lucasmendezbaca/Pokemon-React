@@ -23,7 +23,7 @@ function Register() {
 
     function loginWithGoogle() {
         loginWithGoogleService();
-        navigate('/pokedex');
+        // navigate('/pokedex');
     }
 
     return (

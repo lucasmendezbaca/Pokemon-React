@@ -7,6 +7,7 @@ function Play() {
     const [isLoading, setIsLoading] = useState(true);
     const [tryName, setTryName] = useState([]);
     const [isCorrect, setIsCorrect] = useState();
+    const [intentos, setIntentos] = useState(0);
 
     useEffect( () => {
         cargarPokemon()
@@ -29,6 +30,7 @@ function Play() {
 
 
     function check(e) {
+        setIsCorrect(undefined);
         const inputLetter = e.target.value;
         const index = e.target.getAttribute('indice');
         const newTryName = tryName.map( (letter, i) => {
@@ -57,7 +59,8 @@ function Play() {
 
     function endGame(e) {
         if(e.key === 'Enter'){
-            const tryNameString = tryName.join('');
+            setIntentos(intentos + 1);
+            const tryNameString = tryName.join('').toLowerCase();
             if(tryNameString === pokemon.name) {
                 setIsCorrect(true);
             } else {
@@ -70,7 +73,11 @@ function Play() {
 
     function newGame() {
         cargarPokemon();
-        setIsCorrect(false);
+        setIntentos(0);
+        setIsCorrect(undefined);
+
+        const inputs = document.querySelectorAll('.input-play');
+        inputs.forEach( input => input.value = '');
     }
 
     if(isLoading) {
@@ -80,16 +87,20 @@ function Play() {
     return (
         <div>
             <h1>Play</h1>
+            <h3 className='intentos-play'>Intentos: {intentos}</h3>
             <div className='game-container'>
-                <h3>{pokemon.name}</h3>
-                <img className='img-play' src={pokemon.sprites.front_default} />
+                {/* <p>Para que hagas las pruebas te doy el nombre <br/> Nombre = {pokemon.name}</p> */}
+                <img className={isCorrect !== true ? 'img-play' : ''} draggable='false' src={pokemon.sprites.front_default} />
                 <div className='input-play-container'>
                     {
                         pokemon.name.split('').map( (letter ,index) => <input className='input-play' type='text' maxLength="1" key={index} indice={index} onChange={check} onKeyUp={endGame} />)
                     }
                 </div>
                 {
-                    isCorrect && <h3>Correcto</h3>
+                    isCorrect === true && <h3>Correcto!</h3>
+                }
+                {
+                    isCorrect === false && <h3>Incorrecto!</h3>
                 }
             </div>
             <button className='boton' onClick={newGame}>New Game</button>

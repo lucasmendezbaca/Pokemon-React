@@ -1,0 +1,21 @@
+.section {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10vh;
+    justify-content: center;
+    gap: 3vw;
+}
+
+.section__info--pokedex {
+    flex-basis: 35%;
+}
+
+.section__img-container--pokedex {
+    flex-basis: 65%;
+    max-width: 65%;
+}
+
+
+.section__img-container--pokedex img {
+    max-width: 100%;
+}

@@ -1,5 +1,5 @@
-import React, { useState, useContext } from 'react';
-import { logIn as serviceLogIn, currentUser} from '../services/authService';
+import React, { useState } from 'react';
+import { logIn as serviceLogIn, loginWithGoogle} from '../services/authService';
 import { useNavigate } from 'react-router-dom';
 
 function Login() {
@@ -34,6 +34,11 @@ function Login() {
                 <input placeholder=" " type="password" required onChange={changePassword} />
                 <span>Password</span>
             </label>
+
+            <div>
+                <span>Login with:</span>
+                <button onClick={loginWithGoogle}>Google</button>
+            </div>
 
             <button className="pure-material-button-contained" onClick={logIn}>Log In</button>
 
